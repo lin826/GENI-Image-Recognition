@@ -4,6 +4,7 @@ import os
 import clip
 import json
 import torch
+from PIL import Image
 from flask import Flask, request, jsonify
 from torchvision.datasets import CIFAR100
 
