@@ -2,8 +2,9 @@ import requests
 from PIL import Image
 
 
-def fetchFromURL(imageFolder, num):
-    img_url = "https://picsum.photos/640/360"
+def fetchFromURL(fetchWidthHeight, imageFolder, num):
+    
+    img_url = f"https://picsum.photos/{fetchWidthHeight}"
 
     # request image from url
     img = Image.open(requests.get(img_url, stream = True).raw)
@@ -20,14 +21,14 @@ def fetchFromLocal(imageFolder, num):
 
 
 
-def fetchImages(imageFolder, num):
+def fetchImages(fetchWidthHeight, imageFolder, num):
     images = []
     for i in range(num):
         try:
             images.append(fetchFromLocal(imageFolder, str(i+1)))
             print("image fetch from local")
         except:
-            fetchFromURL(imageFolder, str(i+1))
+            fetchFromURL(fetchWidthHeight, imageFolder, str(i+1))
             images.append(fetchFromLocal(imageFolder, str(i+1)))
             print("image fetch from url")
     return images
