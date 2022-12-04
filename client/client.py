@@ -24,13 +24,15 @@ if __name__ == '__main__':
 
         try:
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
-            r = requests.post(server + "/recognize", files=my_img)
             print("image fetch from local")
+            r = requests.post(server + "/recognize", files=my_img)
+            
         except:
             fetchFromURL(imageFolder, str(i+1))
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
-            r = requests.post(server + "/recognize", files=my_img)
             print("image fetch from url")
+            r = requests.post(server + "/recognize", files=my_img)
+            
 
         
         # convert server response into JSON format.
