@@ -2,16 +2,21 @@
 
 [CS655] Deploy image recognition application on GENI.
 
-## GENI Rspec
+## GENI Setup
 
-```xml
-<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
-</rspec>
-```
+1. Create a new Slice
+1. Create new Resource
+1. Choose RSpec with `File` and upload `geni_rspec.xml` in this repo.
+1. Click on `Site 1` box to choose one available InstaGENI site.
+1. Click `Reserve Resources` and wait until the resources are finished.
 
-## SSH connection
+If the final result is `Failed`, please select another InstaGENI.
 
-## Install
+## Server
+
+After the ssh login, we need to install and run the server.
+
+### Install
 
 ```sh
 sudo apt-get update
@@ -22,7 +27,7 @@ pip3 install torch torchvision torchaudio --extra-index-url https://download.pyt
 pip3 install -r requirements.txt
 ```
 
-## Server
+### Run
 
 ```sh
 uwsgi --http :5000 --wsgi-file server/server.py --callable app
