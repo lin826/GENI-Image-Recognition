@@ -30,7 +30,7 @@ if __name__ == '__main__':
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
             print("image fetch from url")
 
-        r = requests.post(server, files=my_img)
+        r = requests.post(server + "/recognize", files=my_img)
         # convert server response into JSON format.
         print(r.json())
 
