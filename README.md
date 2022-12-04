@@ -53,5 +53,5 @@ python3 -m pip install --upgrade Pillow
 2. The client can be started by the command.
 ``` bash
 cd client
-python3 client.py -s SERVER [-n number of image]
+python3 client.py -s SERVER [-n number of image] [-f width/height of the image]
 ```
