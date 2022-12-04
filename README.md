@@ -16,14 +16,11 @@
 ### Client
 1. Set the environment by the following command:
 ``` bash
-cd client
-python3 -m venv myenv
-source myenv/bin/activate
-pip3 install -r requirements.txt
+python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade Pillow
 ```
 2. The client can be started by the command.
 ``` bash
 cd client
-source myenv/bin/activate
-python3 client.py
+python3 client.py -s SERVER [-n number of image]
 ```
