@@ -27,7 +27,7 @@ def fetchImages(imageFolder, num):
             images.append(fetchFromLocal(imageFolder, str(i+1)))
             print("image fetch from local")
         except:
-            fetchFromURL(str(i+1))
+            fetchFromURL(imageFolder, str(i+1))
             images.append(fetchFromLocal(imageFolder, str(i+1)))
             print("image fetch from url")
     return images
