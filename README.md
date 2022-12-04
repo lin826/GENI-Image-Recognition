@@ -21,6 +21,12 @@ python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 ```
 
+## Server
+
+```sh
+uwsgi --http 10.10.1.1:5000 --master -p 2 --wsgi-file server/server.py --callable app
+```
+
 ## Reference
 
 [OpenAI CLIP(Contrastive Language-Image Pre-Training)](https://github.com/openai/CLIP)
