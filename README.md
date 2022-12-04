@@ -18,13 +18,14 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt install python3-pip
 python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
+pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+pip3 install -r requirements.txt
 ```
 
 ## Server
 
 ```sh
-uwsgi --http 10.10.1.1:5000 --master -p 2 --wsgi-file server/server.py --callable app
+uwsgi --http :5000 --wsgi-file server/server.py --callable app
 ```
 
 ## Reference

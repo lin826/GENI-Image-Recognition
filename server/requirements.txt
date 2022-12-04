@@ -1,3 +1,4 @@
+asgiref==3.4.1
 asn1crypto==0.24.0
 certifi==2018.1.18
 chardet==3.0.4
@@ -38,6 +39,7 @@ typing_extensions==4.1.1
 ufw==0.36
 unattended-upgrades==0.1
 urllib3==1.22
+uWSGI==2.0.21
 wcwidth==0.2.5
 Werkzeug==2.0.3
 zipp==3.6.0
