@@ -25,16 +25,19 @@ if __name__ == '__main__':
         try:
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
             print("image fetch from local")
-            r = requests.post(server + "/recognize", files=my_img)
-            
         except:
             fetchFromURL(imageFolder, str(i+1))
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
             print("image fetch from url")
-            r = requests.post(server + "/recognize", files=my_img)
+        
+        try:
+            r = requests.post(server + "/recognize", files=my_img, timeout=200)
+            print(r.json())
+        except Exception as e:
+            print(e)
             
 
         
         # convert server response into JSON format.
-        print(r.json())
+        
 
