@@ -17,7 +17,8 @@
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt install python3-pip
-pip3 --no-cache-dir install -r requirements.txt
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
 ```
 
 ## Reference
