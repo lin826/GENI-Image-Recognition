@@ -33,6 +33,22 @@ pip3 install -r requirements.txt
 uwsgi --http :5000 --wsgi-file server/server.py --callable app
 ```
 
+## Client
+Login in to the client node.
+### Install
+``` bash
+sudo apt-get update
+sudo apt install python3-pip
+python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade Pillow
+```
+### Run
+``` bash
+cd client
+python3 client.py -s SERVER [-n number of image] [-f width/height of the image]
+```
+
+
 ## Reference
 
 [OpenAI CLIP(Contrastive Language-Image Pre-Training)](https://github.com/openai/CLIP)
@@ -41,17 +57,3 @@ uwsgi --http :5000 --wsgi-file server/server.py --callable app
 
 - [ ] Cache mechanism
 - [ ] TCP handshake HTTP/1.0
-
-
-## How to install and test
-### Client
-1. Set the environment by the following command:
-``` bash
-python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade Pillow
-```
-2. The client can be started by the command.
-``` bash
-cd client
-python3 client.py -s SERVER [-n number of image] [-f width/height of the image]
-```
