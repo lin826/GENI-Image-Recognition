@@ -14,6 +14,7 @@ model, preprocess = clip.load('ViT-B/32', device)
 
 # Download the dataset
 cifar100 = CIFAR100(root=os.path.expanduser("~/.cache"), download=True, train=False)
+text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in cifar100.classes]).to(device)
 
 app = Flask(__name__)
 @app.route('/')
@@ -27,8 +28,6 @@ def recognize_image():
 
     # Prepare the inputs
     image_input = preprocess(img).unsqueeze(0).to(device)
-    text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in cifar100.classes]).to(device)
-
 
     # Calculate features
     with torch.no_grad():
@@ -44,4 +43,5 @@ def recognize_image():
     for value, index in zip(values, indices):
         return jsonify({'text': cifar100.classes[index],'accuracy': value.item()})
 
-app.run()
+if __name__ == '__main__':
+    app.run()
