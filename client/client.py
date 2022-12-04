@@ -1,6 +1,7 @@
 from fetchImg import *
 import requests
 import argparse
+import os
 
 imageFolder = "image"
 
@@ -21,6 +22,11 @@ def parseOption():
 if __name__ == '__main__':
     server, numOfImage, fetchWidthHeight = parseOption()
     # images = fetchImages(defaultWidthHeight, imageFolder, numOfImage)
+
+    try:
+        os.mkdir(imageFolder)
+    except:
+        pass
     
     for i in range(numOfImage):
         # images[i].show()
