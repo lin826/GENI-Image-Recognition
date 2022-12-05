@@ -25,9 +25,10 @@ def validWidthHeight(widthHeight):
     try:
         width = int(tmp[0])
         height = int(tmp[1])
+        if width <= 0 or height <= 0:
+            return False
         return True
     except Exception as e:
-        print("Invalid format of width/height!")
         return False
 
 
@@ -35,8 +36,7 @@ if __name__ == '__main__':
     server, numOfImage, fetchWidthHeight, timeout = parseOption()
     # images = fetchImages(defaultWidthHeight, imageFolder, numOfImage)
 
-    if not validWidthHeight(fetchWidthHeight):
-        exit()
+    
 
     try:
         os.mkdir(imageFolder)
@@ -47,6 +47,9 @@ if __name__ == '__main__':
         # images[i].show()
 
         if fetchWidthHeight:
+            if not validWidthHeight(fetchWidthHeight):
+                print("Invalid format of width/height!")
+                exit()
             fetchFromURL(fetchWidthHeight, imageFolder, str(i+1))
             print("image fetch from url")
         else:
