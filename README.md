@@ -45,7 +45,7 @@ python3 -m pip install --upgrade Pillow
 ### Run
 ``` bash
 cd client
-python3 client.py -s SERVER [-n number of image] [-f width/height of the image]
+python3 client.py -s http://server [-n number of image] [-t timeout] [-f width/height of the image]
 ```
 
 
