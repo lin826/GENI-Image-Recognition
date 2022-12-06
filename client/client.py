@@ -2,8 +2,10 @@ from fetchImg import *
 import requests
 import argparse
 import os
+import shutil
 
 imageFolder = "image"
+resultFolder = "result"
 
 url = 'http://127.0.0.1:5000/recognize'
 
@@ -36,10 +38,13 @@ if __name__ == '__main__':
     server, numOfImage, fetchWidthHeight, timeout = parseOption()
     # images = fetchImages(defaultWidthHeight, imageFolder, numOfImage)
 
-    
-
     try:
         os.mkdir(imageFolder)
+    except:
+        pass
+    
+    try:
+        os.mkdir(resultFolder)
     except:
         pass
     
@@ -63,7 +68,10 @@ if __name__ == '__main__':
         try:
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
             r = requests.post(server + ":5000/recognize", files=my_img, timeout=timeout)
-            print(r.json())
+            result = r.json()
+            print(result)
+            shutil.copy(f"{imageFolder}/{i+1}.png", f"{resultFolder}/{i+1}.png")
+            os.rename(f"{resultFolder}/{i+1}.png", f"{resultFolder}/{i+1}_{result['text']}.png")
         except Exception as e:
             print(e)
 
