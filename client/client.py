@@ -3,6 +3,7 @@ import requests
 import argparse
 import os
 import shutil
+from datetime import datetime
 
 imageFolder = "image"
 resultFolder = "result"
@@ -68,10 +69,15 @@ if __name__ == '__main__':
         try:
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
             r = requests.post(server + ":5000/recognize", files=my_img, timeout=timeout)
+        except Exception as e:
+            print(e)
+        
+        if r.status_code == 200:
             result = r.json()
             print(result)
             shutil.copy(f"{imageFolder}/{i+1}.png", f"{resultFolder}/{i+1}.png")
-            os.rename(f"{resultFolder}/{i+1}.png", f"{resultFolder}/{i+1}_{result['text']}.png")
-        except Exception as e:
-            print(e)
+            time = datetime.now().strftime("%H:%M:%S")
+            os.rename(f"{resultFolder}/{i+1}.png", f"{resultFolder}/{time}_{result['text']}.png")
+        elif r.status_code >= 500 and r.status_code < 600:
+            print("Server Error!")
 
