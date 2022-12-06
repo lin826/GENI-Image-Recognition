@@ -21,16 +21,17 @@ After the ssh login, we need to install and run the server.
 ```sh
 sudo apt-get update
 sudo apt-get upgrade
+sudo apt-get install uwsgi uwsgi-plugin-python
 sudo apt install python3-pip
 python3 -m pip install --upgrade pip
-pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
-pip3 install -r requirements.txt
+python3 -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+python3 -m pip install -r server/requirements.txt
 ```
 
 ### Run
 
 ```sh
-uwsgi --http :5000 --wsgi-file server/server.py --callable app
+uwsgi --plugin http,python --http :5000 --wsgi-file server/server.py --callable app
 ```
 
 ## Client
