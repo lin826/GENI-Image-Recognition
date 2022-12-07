@@ -4,6 +4,16 @@ from PIL import Image
 defaultWidthHeight = "640/360"
 
 
+def parseWidthHeight(widthHeight):
+    if widthHeight:
+        tmp = widthHeight.split("/")
+        width = int(tmp[0])
+        height = int(tmp[1])
+        return width, height
+    else:
+        return 640, 360
+
+
 def validWidthHeight(widthHeight):
     tmp = widthHeight.split("/")
     try:

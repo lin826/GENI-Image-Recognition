@@ -1,4 +1,6 @@
 from fetchImg import *
+from output import *
+from record import *
 import requests
 import argparse
 import os
@@ -8,6 +10,7 @@ from datetime import datetime
 imageFolder = "image"
 resultFolder = "result"
 
+recordList = []
 
 def parseOption():
     parser = argparse.ArgumentParser()
@@ -35,28 +38,44 @@ if __name__ == '__main__':
     server, port, numOfImage, fetchWidthHeight, timeout = parseOption()
 
     checkFolder()
+
+    sumRTT = 0
+    success = 0
     
     for i in range(numOfImage):
 
         fetchImage(imageFolder, i, fetchWidthHeight)
         
+        requestTime = datetime.now().strftime("%H:%M:%S")
         try:
             my_img = {'image': open(f"{imageFolder}/{i+1}.png", 'rb')}
             url = server + ":" + str(port) + "/recognize"
             print("Waiting for server response...")
-            requestTime = datetime.now().strftime("%H:%M:%S")
             r = requests.post(url, files=my_img, timeout=timeout)
-            responseTime = datetime.now().strftime("%H:%M:%S")
-            # print(requestTime, responseTime)
             print("Results: ", end = "")
             if r.status_code == 200:
+                success += 1
                 result = r.json()
                 print(result)
                 shutil.copy(f"{imageFolder}/{i+1}.png", f"{resultFolder}/{i+1}.png")
-                os.rename(f"{resultFolder}/{i+1}.png", f"{resultFolder}/{responseTime}_{result['text']}.png")
+                os.rename(f"{resultFolder}/{i+1}.png", f"{resultFolder}/{requestTime}_{result['text']}.png")
+                # record
+                responseTime = datetime.now().strftime("%H:%M:%S")
+                width, height = parseWidthHeight(fetchWidthHeight)
+                delta = datetime.strptime(responseTime, "%H:%M:%S") - datetime.strptime(requestTime, "%H:%M:%S")
+                sumRTT += delta.total_seconds()
+                record = Record(f"{imageFolder}/{i+1}.png", requestTime, responseTime, delta.total_seconds(), width, height)
+                recordList.append(record)
             elif r.status_code >= 500 and r.status_code < 600:
                 print("Server Error! " + r.content)
         except Exception as e:
             print(e)
         print()
+    
+    print(f"Send {numOfImage} requests, {success} success, {numOfImage-success} fail.")
+    if numOfImage-success != numOfImage:
+        print(f"Avareage RTT: {sumRTT/success}sec.")
+    
+    if recordList:
+        outputCSV(datetime.now().strftime("%H:%M:%S"), recordList)
 
