@@ -1,0 +1,4 @@
+filename,request time,response time,RTT,image width,image height
+image/4.png,20:18:21.790237,20:19:02.270895,40480.657999999996,100,100
+image/5.png,20:19:02.663214,20:19:43.989041,41325.827,100,100
+,,average RTT,40903.24249999999,,
