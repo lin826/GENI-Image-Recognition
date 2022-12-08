@@ -31,7 +31,7 @@ python3 -m pip install -r server/requirements.txt
 ### Run
 
 ```sh
-uwsgi --plugin http,python --http :5000 --wsgi-file server/server.py --callable app
+uwsgi --plugin http,python3 --http :5000 --wsgi-file server/server.py --callable app
 ```
 
 ## Client
