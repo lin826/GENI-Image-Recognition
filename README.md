@@ -58,7 +58,7 @@ Next, each worker machine should run the following:
 For each worker, run the following script to start the http server. Also, make sure you see `spawned uWSGI worker 1 (and the only)` in the terminal to be a prepared worker.
 
 ```sh
-uwsgi --plugin http,python3 --http :5000 --wsgi-file server/worker.py --callable app
+uwsgi --plugin http,python3 --http :3000 --wsgi-file server/worker.py --callable app
 ```
 
 If the server is not the worker, run the following script to be the task manager:
