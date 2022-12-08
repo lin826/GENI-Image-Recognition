@@ -3,7 +3,6 @@
 import json
 import random
 import requests
-from PIL import Image
 from flask import Flask, request
 
 WORKER_COUNT = 3
@@ -29,7 +28,9 @@ def distribute_task():
 
             # Send the task
             print("Send request to ", "http://worker-" + str(i) + ":3000/recognize")
-            r = requests.post("http://worker-" + str(i) + ":3000/recognize", files=request.files, timeout=10000)
+            r = requests.post("http://worker-" + str(i) + ":3000/recognize", files={
+                'image': request.files['image'].read()
+            }, timeout=10000)
             if r.status_code == 200:
                 return r.json()
         except:

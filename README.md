@@ -22,20 +22,11 @@ Clone this project and install the necessary libraries.
 
 ```sh
 sudo apt-get update
-sudo apt-get upgrade
 sudo apt-get install uwsgi uwsgi-plugin-python3
 sudo apt install python3-pip
 python3 -m pip install --upgrade pip
 python3 -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
 python3 -m pip install -r server/requirements.txt
-```
-
-### Dataset predownload
-
-Before setup LAN for each worker, we need to make sure the image recognition dataset is downloaded into `.cache/`.
-
-```sh
-python3 server/worker.py
 ```
 
 
@@ -61,7 +52,7 @@ For each worker, run the following script to start the http server. Also, make s
 uwsgi --plugin http,python3 --http :3000 --wsgi-file server/worker.py --callable app
 ```
 
-If the server is not the worker, run the following script to be the task manager:
+If the server is not a worker, run the following script to be the task manager:
 
 ```sh
 uwsgi --plugin http,python3 --http :5000 --wsgi-file server/server.py --callable app -p 4
