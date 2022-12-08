@@ -37,6 +37,10 @@ def checkFolder():
 if __name__ == '__main__':
     server, port, numOfImage, fetchWidthHeight, timeout = parseOption()
 
+    if numOfImage > 15:
+        print("The maximum number of images sending to the server is 15.")
+        exit()
+
     checkFolder()
 
     
@@ -60,8 +64,9 @@ if __name__ == '__main__':
                 responseTime = datetime.now().strftime("%H:%M:%S.%f")
                 width, height = parseWidthHeight(fetchWidthHeight)
                 delta = datetime.strptime(responseTime, "%H:%M:%S.%f") - datetime.strptime(requestTime, "%H:%M:%S.%f")
-                record = Record(f"{imageFolder}/{i+1}.png", requestTime, responseTime, delta.total_seconds() * 1000, width, height)
+                record = Record(f"{imageFolder}/{i+1}.png", requestTime, responseTime, delta.total_seconds() * 1000, result['server process time'], width, height)
                 recordList.append(record)
+                print("RTT:",  delta.total_seconds() * 1000, "msec.")
             elif r.status_code >= 500 and r.status_code < 600:
                 print("Server Error! " + r.content)
         except Exception as e:
@@ -70,9 +75,9 @@ if __name__ == '__main__':
     
     print(f"Send {numOfImage} requests, {len(recordList)} success, {numOfImage-len(recordList)} fail.")
     if recordList:
-        aveRTT = outputCSV(datetime.now().strftime("%H:%M:%S.%f"), recordList)
+        aveRTT, avePT = outputCSV(datetime.now().strftime("%H:%M:%S.%f"), recordList)
         print(f"Avareage RTT: {aveRTT}msec.")
-        outputRTT(width, height, aveRTT)
+        outputRTT(width, height, aveRTT, avePT)
     else:
         print(f"Avareage RTT: N/A msec.")
     
