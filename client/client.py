@@ -17,7 +17,7 @@ def parseOption():
     parser.add_argument("-s", "--server", type=str, help="server address", default="http://server")
     parser.add_argument("-p", "--port", type=int, help="server address", default=5000)
     parser.add_argument("-n", "--num", type=int, help="number of image", default=5)
-    parser.add_argument("-f", "--fetch", type=str, help="fetch the image from url with specific size width/height")
+    parser.add_argument("-f", "--fetch", type=str, help="fetch the image from url with specific size width/height", default="100/100")
     parser.add_argument("-t", "--timeout", type=int, help="timeout", default=1000)
     args = parser.parse_args()
     return args.server, args.port, args.num, args.fetch, args.timeout

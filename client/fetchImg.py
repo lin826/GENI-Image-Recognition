@@ -1,7 +1,7 @@
 import requests
 from PIL import Image
 
-defaultWidthHeight = "640/360"
+defaultWidthHeight = "100/100"
 
 
 def parseWidthHeight(widthHeight):
@@ -11,7 +11,7 @@ def parseWidthHeight(widthHeight):
         height = int(tmp[1])
         return width, height
     else:
-        return 640, 360
+        return 100, 100
 
 
 def validWidthHeight(widthHeight):
