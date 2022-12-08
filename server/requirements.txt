@@ -5,4 +5,3 @@ Pillow==8.4.0
 regex==2022.10.31
 tqdm==4.64.1
 urllib3==1.22
-uWSGI==2.0.21

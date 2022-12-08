@@ -18,8 +18,7 @@ After the ssh login, we need to install and run the server and workers.
 
 ### Install
 
-If the server is the only worker, these installation are required.
-Otherwise, only install on workers should be enough.
+Clone this project and install the necessary libraries.
 
 ```sh
 sudo apt-get update
@@ -45,11 +44,13 @@ python3 server/worker.py
 If the server is the only worker, this section can be skipped. Otherwise, we need to setup the router and each sub-workers under the local network. According to the resource of [LAN setup](https://witestlab.poly.edu/blog/designing-subnets/), run the following shell script on the router machine:
 
 ```sh
+
 ```
 
 Next, each worker machine should run the following:
 
 ```sh
+
 ```
 
 ### Run
@@ -73,7 +74,8 @@ Login in to the client node.
 ``` bash
 sudo apt-get update
 sudo apt install python3-pip
-python3 -m pip install --upgrade pip Pillow
+python3 -m pip install --upgrade pip 
+python3 -m pip install --upgrade Pillow
 ```
 
 ### Run
