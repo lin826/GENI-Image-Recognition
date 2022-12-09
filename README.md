@@ -47,7 +47,7 @@ python3 -m pip install --upgrade Pillow
 Make sure the server is on
 ``` bash
 cd client
-wget server:5000/
+wget http://72.36.65.79:5000
 ```
 
 Run the client
@@ -55,7 +55,7 @@ Run the client
 python3 client.py [-s SERVER] [-p PORT] [-n number of image] [-t timeout] [-f width/height of the image]
 ```
 #### default value
-- SERVER: http://server
+- SERVER: http://72.36.65.79
 - PORT: 5000
 - number of image: 5
 - timeout: 1000

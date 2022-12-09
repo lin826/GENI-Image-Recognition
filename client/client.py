@@ -14,7 +14,7 @@ recordList = []
 
 def parseOption():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--server", type=str, help="server address", default="http://server")
+    parser.add_argument("-s", "--server", type=str, help="server address", default="http://72.36.65.79")
     parser.add_argument("-p", "--port", type=int, help="server address", default=5000)
     parser.add_argument("-n", "--num", type=int, help="number of image", default=5)
     parser.add_argument("-f", "--fetch", type=str, help="fetch the image from url with specific size width/height", default="100/100")
